@@ -9,10 +9,8 @@ project(clifford
 
 if (NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     message(STATUS "This project has a top-level one called [${CMAKE_PROJECT_NAME}]")
-    # Check if the git repository is up-to-date
     find_package(Git QUIET)
     if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-        # Notify user if local repository is out of date
         execute_process(
             COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -48,28 +46,23 @@ target_sources(${PROJECT_NAME} PRIVATE ${sources})
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        # where the library itself will look for its internal headers
         ${CMAKE_CURRENT_SOURCE_DIR}/src
     PUBLIC
-        # where top-level project will look for the library's public headers
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        # where external projects will look for the library's public headers
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-# install public headers
 set(public_headers
     include/${entrypoint}.hpp
 )
 
-# not for MSVC
 if(CMAKE_COMPILER_IS_GNUCXX)
-    # compile options for this target only
-    # treat warnings as errors
     target_compile_options(${PROJECT_NAME} PRIVATE -Werror)
 endif()
 
+# Added demo executable target so users can run a sample out of the box
+add_executable(clifford_demo examples/main.cpp)
+target_link_libraries(clifford_demo PRIVATE ${PROJECT_NAME})
 
-# where to find our CMake modules
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(Install)
