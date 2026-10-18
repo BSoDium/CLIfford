@@ -4,6 +4,8 @@
 
 Clifford is a simple and highly customizable command line interface library for your application. It is fully written in C++.
 
+![cliford.tape](./clifford.gif)
+
 ## Features
 
 - [x] Custom commands, arguments and options
