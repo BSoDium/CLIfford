@@ -31,5 +31,6 @@
 *.out
 *.app
 
-# Build folder
+# Output of the build process
 build/
+install/
