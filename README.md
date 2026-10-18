@@ -1,5 +1,7 @@
 # CLIfford
 
+<img src="https://user-images.githubusercontent.com/46868627/209482725-4028e31d-4a9c-4dd5-8d06-7d90c4ddf82e.png" alt="Your image title" width="235"/>
+
 ![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![CMake](https://img.shields.io/badge/CMake-3.15%2B-orange.svg)
